@@ -20,7 +20,7 @@ class SignIn extends Component {
     } else {
       try {
         console.log({ email, password });
-        this.props.history.push("/app");
+        this.props.history.push("/init");
       } catch (err) {
         this.setState({
           error:

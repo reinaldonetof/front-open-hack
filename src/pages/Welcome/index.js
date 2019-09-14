@@ -1,31 +1,32 @@
-import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import React, { useState } from 'react'
+import { withRouter, Redirect } from 'react-router-dom'
 
 import './styles.css'
 
-class Welcome extends Component {
-  render() {
-    return (
-      <div className="background-welcome">
-        <div className="welcome">
-          <button onClick={() => { }}>
-            <Link to='/signin'>
-              <button onClick={() => { }}>
-                Sign In
-            </button>
-            </Link>
-          </button>
-          <button onClick={() => { }}>
-            <Link to='/signup'>
-              <button onClick={() => { }}>
-                Sign Up
-              </button>
-            </Link>
-          </button>
-        </div>
-      </div>
-    )
+const Welcome = () => {
+  const[bSignIn, setBSignIn] = useState(false)
+  const[bSignUp, setBSignUp] = useState(false)
+
+  if(bSignIn) {
+    return <Redirect to='signin' />
   }
+
+  if(bSignUp) {
+    return <Redirect to='signup' />
+  }
+
+  return (
+    <div className="background-welcome">
+      <div className="welcome">
+        <button onClick={() => setBSignIn(true)}>
+          Sign In
+          </button>
+        <button onClick={() => setBSignUp(true)}>
+          Sign Up
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export default withRouter(Welcome)
