@@ -13,7 +13,7 @@
 .background div.forms{
   min-height: 75vh;
   background: rgba(240, 240, 240, 0.7);
-  border: 2px solid rgb(100,100,100);
+  border: 2px solid rgba(240,0,78,1);
   border-radius: 3vh;
   display: flex;
   flex-direction: column;
@@ -60,7 +60,7 @@ input ::placeholder {
 button {
   color: #fff;
   font-size: 16px;
-  background: #fc6963;
+  background: rgba(240,0,78,1);
   height: 56px;
   border: 0;
   border-radius: 3vh;
