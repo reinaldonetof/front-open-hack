@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Avatar, Typography } from '@material-ui/core';
 
+import perfil from '../../../../../../assets/perfil/8biticon.jpg'
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -31,7 +33,7 @@ const Profile = props => {
 
   const user = {
     name: 'Number 8',
-    avatar: '/images/avatars/avatar_11.png',
+    avatar: perfil,
     bio: 'Brain Director'
   };
 
