@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 
+import { SearchInput } from '../../../../components';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProductsToolbar = props => {
+const UsersToolbar = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -45,18 +46,21 @@ const ProductsToolbar = props => {
           color="primary"
           variant="contained"
         >
-          Add product
+          Add user
         </Button>
       </div>
       <div className={classes.row}>
-        
+        <SearchInput
+          className={classes.searchInput}
+          placeholder="Search user"
+        />
       </div>
     </div>
   );
 };
 
-ProductsToolbar.propTypes = {
+UsersToolbar.propTypes = {
   className: PropTypes.string
 };
 
-export default ProductsToolbar;
+export default UsersToolbar;
