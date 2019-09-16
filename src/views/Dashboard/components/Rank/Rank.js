@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -17,11 +16,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Tooltip,
-  TableSortLabel
 } from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
-import ArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft'
 
 import mockData from './data'
 
@@ -31,7 +26,8 @@ const useStyles = makeStyles(theme => ({
     padding: 0
   },
   inner: {
-    minWidth: 300
+    minWidth: 300,
+    maxHeight: 260
   },
   statusContainer: {
     display: 'flex',
@@ -91,7 +87,7 @@ const NextHacks = props => {
       className={clsx(classes.root, className)}
     >
       <CardHeader
-        title="Next Hacks"
+        title="Ranking"
       />
       <Divider />
       <CardContent className={classes.content}>
@@ -100,40 +96,18 @@ const NextHacks = props => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Company</TableCell>
-                  <TableCell>Description</TableCell>
-                  <TableCell sortDirection="desc">
-                    <Tooltip
-                      enterDelay={300}
-                      title="Sort"
-                    >
-                      <TableSortLabel
-                        active
-                        direction="desc"
-                      >
-                        Date
-                      </TableSortLabel>
-                    </Tooltip>
-                  </TableCell>
-                  <TableCell size={'small'}>Value</TableCell>
+                  <TableCell><Button>Rank Global</Button></TableCell>
+                  <TableCell><Button>Rank Amigo</Button></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {companies.slice(initialCompany,rowPerPage).map(company => (
+                {companies.slice(0,9).map(company => (
                   <TableRow
                     hover
                     key={company.id}
                   >
                     <TableCell>{company.ref}</TableCell>
                     <TableCell>{company.customer.name}</TableCell>
-                    <TableCell>
-                      {moment(company.createdAt).format('DD/MM/YYYY')}
-                    </TableCell>
-                    <TableCell>
-                      <div className={classes.statusContainer}>
-                        {company.amount}
-                      </div>
-                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -143,14 +117,6 @@ const NextHacks = props => {
       </CardContent>
       <Divider />
       <CardActions className={classes.actions}>
-        <ButtonGroup variant="contained" size="small" aria-label="small contained button group">
-          <Button variant="contained" disabled={disableLeft} color="default" onClick={() => handlePreviousPage()}>
-            <ArrowLeftIcon />
-          </Button>
-          <Button variant="contained" disabled={disableRight} color="default" onClick={() => handleNextPage()}>
-            <ArrowRightIcon />
-          </Button>
-        </ButtonGroup>
       </CardActions>
     </Card>
   );

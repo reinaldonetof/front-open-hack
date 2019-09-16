@@ -5,7 +5,8 @@ import { Grid } from '@material-ui/core';
 import {
   PersonalRank,
   NextRank,
-  NextHacks
+  NextHacks,
+  Rank
 } from './components'
 
 const useStyles = makeStyles(theme => ({
@@ -30,7 +31,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <PersonalRank valuerank={'advanced'} />
+          <PersonalRank valuerank={'embassador'} />
         </Grid>
         <Grid
           item
@@ -39,7 +40,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <NextRank valuerank={'intermediate'} />
+          <NextRank valuerank={'embassador'} />
         </Grid>
         <Grid
           item
@@ -49,6 +50,15 @@ const Dashboard = () => {
           xs={12}
         >
           <NextHacks />
+        </Grid>
+        <Grid
+          item
+          lg={4}
+          md={8}
+          xl={9}
+          xs={12}
+        >
+          <Rank />
         </Grid>
       </Grid>
     </div>
