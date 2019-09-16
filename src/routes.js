@@ -40,13 +40,18 @@ const Routes = () => (
       <Route exact path='/signup' component={() => <SignUp />} />
       <Route exact path='/signin' component={() => <SignIn />} />
       <Route exact path='/logout' component={() => <LogOut />} />
-      <Route exact path='/companies' component={() => <Companies />} />
       <PrivateRoute exact path='/init' component={() => <RedirectToDash />} />
       <RouteWithLayout
         component={DashboardView}
         exact
         layout={Init}
         path='/dashboard'
+      />
+      <RouteWithLayout
+        component={Companies}
+        exact
+        layout={Init}
+        path='/companies'
       />
       <Route path='*' component={() => <h1>Page not found</h1>} />
     </Switch>

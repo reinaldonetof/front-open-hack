@@ -47,7 +47,7 @@ const Dashboard = () => {
           lg={8}
           md={12}
           xl={9}
-          xs={12}
+          xs={8}
         >
           <NextHacks />
         </Grid>
@@ -56,7 +56,7 @@ const Dashboard = () => {
           lg={4}
           md={8}
           xl={9}
-          xs={12}
+          xs={8}
         >
           <Rank />
         </Grid>
