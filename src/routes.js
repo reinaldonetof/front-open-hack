@@ -4,6 +4,7 @@ import { isAuthenticated } from './services/auth'
 
 import { RouteWithLayout } from './components';
 import Welcome from './pages/Welcome'
+import Companies from './pages/Companies'
 import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
 import Init from './pages/Init'
@@ -39,6 +40,7 @@ const Routes = () => (
       <Route exact path='/signup' component={() => <SignUp />} />
       <Route exact path='/signin' component={() => <SignIn />} />
       <Route exact path='/logout' component={() => <LogOut />} />
+      <Route exact path='/companies' component={() => <Companies />} />
       <PrivateRoute exact path='/init' component={() => <RedirectToDash />} />
       <RouteWithLayout
         component={DashboardView}
