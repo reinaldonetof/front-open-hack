@@ -7,6 +7,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
+import BusinessIcon from '@material-ui/icons/Business';
 
 import { Profile, SidebarNav } from './components';
 
@@ -50,6 +51,11 @@ const SideBar = props => {
       title: 'Users',
       href: '/users',
       icon: <PeopleIcon />
+    },
+    {
+      title: 'Companies',
+      href: '/Companies',
+      icon: <BusinessIcon />
     },
     {
       title: 'Account',
