@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
   },
   inner: {
     minWidth: 300,
-    maxHeight: 260
+    maxHeight: 255,
+    minHeight: 255,
   },
   statusContainer: {
     display: 'flex',
@@ -43,43 +44,13 @@ const useStyles = makeStyles(theme => ({
 
 
 const NextHacks = props => {
-  const { className, ...rest } = props;
+  const { className, ...rest } = props
 
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const [companies] = useState(mockData);
+  const [companies] = useState(mockData)
 
-  const [initialCompany, setInitialCompany] = useState(0)
-  const [rowPerPage, setRowPerPage] = useState(3)
-
-  const [disableLeft, setDisableLeft] = useState(true)
-  const [disableRight, setDisableRight] = useState(false)
-
-  useEffect(() => {
-    if (initialCompany > 0) {
-      setDisableLeft(false)
-    } else {
-      setDisableLeft(true)
-    }
-  }, [initialCompany])
-
-  useEffect(() => {
-    if (rowPerPage >= companies.length) {
-      setDisableRight(true)
-    } else {
-      setDisableRight(false)
-    }
-  }, [rowPerPage,companies.length])
-
-  function handleNextPage() {
-    setInitialCompany(initialCompany + 3)
-    setRowPerPage(rowPerPage + 3)
-  }
-  
-  function handlePreviousPage() {
-    setInitialCompany(initialCompany - 3)
-    setRowPerPage(rowPerPage - 3)
-  }
+  const [typeRank, setTypeRank] = useState('global')
 
   return (
     <Card
@@ -96,12 +67,17 @@ const NextHacks = props => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell><Button>Rank Global</Button></TableCell>
-                  <TableCell><Button>Rank Amigo</Button></TableCell>
+                  <TableCell>
+                    <Button onClick={() => setTypeRank('global')}>Rank Global</Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button onClick={() => setTypeRank('friends')}>Rank Amigo</Button>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {companies.slice(0,9).map(company => (
+                { (typeRank == 'global') ?
+                  companies.slice(0,5).map(company => (
                   <TableRow
                     hover
                     key={company.id}
@@ -109,7 +85,18 @@ const NextHacks = props => {
                     <TableCell>{company.ref}</TableCell>
                     <TableCell>{company.customer.name}</TableCell>
                   </TableRow>
-                ))}
+                ))
+                :
+                companies.slice(3,5).map(company => (
+                  <TableRow
+                    hover
+                    key={company.id}
+                  >
+                    <TableCell>{company.ref}</TableCell>
+                    <TableCell>{company.customer.name}</TableCell>
+                  </TableRow>
+                ))
+                }
               </TableBody>
             </Table>
           </div>
