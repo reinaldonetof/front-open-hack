@@ -13,7 +13,8 @@ import {
   Companies as CompaniesView,
   Account as AccountView,
   Settings as SettingsView,
-  UserList as UserListView
+  UserList as UserListView,
+  ProfileCompany as ProfileCompanyView
 } from './views';
 
 const RedirectToDash = () => {
@@ -55,6 +56,12 @@ const Routes = () => (
         exact
         layout={Init}
         path='/companies'
+      />
+      <RouteWithLayout
+        component={ProfileCompanyView}
+        exact
+        layout={Init}
+        path='/companies/:id'
       />
       <RouteWithLayout
         component={SettingsView}

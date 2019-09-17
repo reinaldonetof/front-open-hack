@@ -2,7 +2,7 @@ import uuid from 'uuid/v1';
 
 export default [
   {
-    id: 1243534,
+    id: uuid(),
     ref: 'Amazon',
     amount: 30.5,
     customer: {
@@ -12,7 +12,7 @@ export default [
     status: 'pending'
   },
   {
-    id: 1283746,
+    id: uuid(),
     ref: 'Twitch',
     amount: 25.1,
     customer: {
@@ -22,7 +22,7 @@ export default [
     status: 'delivered'
   },
   {
-    id: 7201648,
+    id: uuid(),
     ref: 'Shawee',
     amount: 10.99,
     customer: {
@@ -32,7 +32,7 @@ export default [
     status: 'refunded'
   },
   {
-    id: 8736954,
+    id: uuid(),
     ref: 'Google',
     amount: 96.43,
     customer: {
@@ -42,7 +42,7 @@ export default [
     status: 'pending'
   },
   {
-    id: 1834950,
+    id: uuid(),
     ref: 'Facebook',
     amount: 32.54,
     customer: {
@@ -52,7 +52,7 @@ export default [
     status: 'delivered'
   },
   {
-    id: 9753468,
+    id: uuid(),
     ref: 'Alibaba',
     amount: 16.76,
     customer: {
