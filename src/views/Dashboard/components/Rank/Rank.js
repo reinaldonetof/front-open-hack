@@ -28,8 +28,8 @@ const useStyles = makeStyles(theme => ({
   },
   inner: {
     minWidth: 300,
-    maxHeight: 255,
-    minHeight: 255,
+    maxHeight: 253,
+    minHeight: 253,
   },
   statusContainer: {
     display: 'flex',

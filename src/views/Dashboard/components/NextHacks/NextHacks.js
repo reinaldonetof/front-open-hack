@@ -32,7 +32,9 @@ const useStyles = makeStyles(theme => ({
     padding: 0
   },
   inner: {
-    minWidth: 300
+    minWidth: 300,
+    minHeight: 225,
+    maxHeight: 225
   },
   statusContainer: {
     display: 'flex',
@@ -145,13 +147,13 @@ const NextHacks = props => {
                         {company.ref}
                       </Button>
                     </TableCell>
-                    <TableCell>{company.customer.name}</TableCell>
+                    <TableCell>{company.resumeDescription}</TableCell>
                     <TableCell>
-                      {moment(company.createdAt).format('DD/MM/YYYY')}
+                      {company.date}
                     </TableCell>
                     <TableCell>
                       <div className={classes.statusContainer}>
-                        {company.amount}
+                        {company.rating} / 10
                       </div>
                     </TableCell>
                   </TableRow>

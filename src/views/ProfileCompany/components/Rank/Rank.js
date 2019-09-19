@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const NextHacks = props => {
+const Description = props => {
   const { className, ...rest } = props
 
   const classes = useStyles()
@@ -125,8 +125,8 @@ const NextHacks = props => {
   );
 };
 
-NextHacks.propTypes = {
+Description.propTypes = {
   className: PropTypes.string
 };
 
-export default NextHacks;
+export default Description;
