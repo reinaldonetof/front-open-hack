@@ -44,10 +44,10 @@ p {
 
 input {
   flex: 1;
-  height: 46px;
-  margin-bottom: 15px;
+  height: 20px;
+  margin-bottom: 10px;
   padding: 0 20px;
-  color: #777;
+  color: #222;
   font-size: 15px;
   width: 90%;
   border: 1px solid #ddd;
@@ -55,16 +55,30 @@ input {
 }
 
 input ::placeholder {
-    color: #999;
+    color: #555;
+}
+
+input ::-ms-value {
+  color: #000
+}
+
+select {
+  height: 30px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+select.country {
+  margin-bottom: 0
 }
 
 button {
   color: #fff;
   font-size: 16px;
   background: rgba(240,0,78,1);
-  height: 56px;
+  height: 40px;
   border: 0;
-  border-radius: 3vh;
+  border-radius: 30%;
   width: 90%;
   cursor: pointer;
   transition: all 0.2s;
