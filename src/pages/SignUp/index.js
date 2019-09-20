@@ -32,7 +32,7 @@ class SignUp extends Component {
       <div className='background'>
         <form onSubmit={this.handleSignUp}>
           <div className='forms'>
-            <div className='imagelink'>
+            <div className='imagelinkIn'>
               <Link to='/'>
                 <img className='img-sign-up' src={Logo} alt='logo-movie-match' />
               </Link>
