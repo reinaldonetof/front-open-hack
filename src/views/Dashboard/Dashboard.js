@@ -32,7 +32,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <PersonalRank valuerank={'embassador'} />
+          <PersonalRank valuerank={'newbie'} />
         </Grid>
         <Grid
           item
@@ -41,7 +41,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <NextRank valuerank={'embassador'} />
+          <NextRank valuerank={'newbie'} />
         </Grid>
         <Grid
           item

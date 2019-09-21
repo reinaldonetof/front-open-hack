@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     width:40
   },
   logo: {
-    height: 60,
+    height: 40,
     marginLeft: theme.spacing(4)
   }
 }))

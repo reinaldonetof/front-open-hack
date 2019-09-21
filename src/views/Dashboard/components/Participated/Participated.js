@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import { withRouter } from 'react-router-dom'
 import {
   Card,
   CardContent,
@@ -48,12 +49,18 @@ const useStyles = makeStyles(theme => ({
 const Participated = props => {
   const [Participated, setParticipated] = useState(
     "1º Shawee Online Hackathon"
-  );
+  )
+  const [idHacka, setIdeHacka] = useState('421974')
 
   const [haveParticipated, setHaveParticipated] = useState('yes')
 
   const { className, ...rest } = props;
   const classes = useStyles();
+
+  function handleAvaluating(id) {
+    let path = `/hacka/${id}`
+    props.history.push(path, {Participated})
+  }
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -85,6 +92,7 @@ const Participated = props => {
                     size="small"
                     variant="outlined"
                     className={classes.buttonHacka}
+                    onClick={() => handleAvaluating(idHacka)}
                   >
                     Yes
                   </Button>
@@ -100,11 +108,7 @@ const Participated = props => {
               </Grid>
             </div>
           ) : (
-            <Grid
-              container
-              justify="center"
-              alignItems="center"
-            >
+            <Grid container justify="center" alignItems="center">
               <Typography style={{ textAlign: "center" }} variant="h4">
                 Serious? Try to participate on next :D
               </Typography>
@@ -120,4 +124,4 @@ Participated.propTypes = {
   className: PropTypes.string
 };
 
-export default Participated;
+export default withRouter(Participated);

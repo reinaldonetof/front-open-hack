@@ -14,7 +14,8 @@ import {
   Account as AccountView,
   Settings as SettingsView,
   UserList as UserListView,
-  ProfileCompany as ProfileCompanyView
+  ProfileCompany as ProfileCompanyView,
+  Avaluating as AvaluatingView
 } from './views';
 
 const RedirectToDash = () => {
@@ -62,6 +63,12 @@ const Routes = () => (
         exact
         layout={Init}
         path='/companies/:id'
+      />
+      <RouteWithLayout
+        component={AvaluatingView}
+        exact
+        layout={Init}
+        path='/hacka/:id'
       />
       <RouteWithLayout
         component={SettingsView}
