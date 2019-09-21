@@ -6,7 +6,8 @@ import {
   PersonalRank,
   NextRank,
   NextHacks,
-  Rank
+  Rank,
+  Participated
 } from './components'
 
 const useStyles = makeStyles(theme => ({
@@ -41,6 +42,15 @@ const Dashboard = () => {
           xs={12}
         >
           <NextRank valuerank={'embassador'} />
+        </Grid>
+        <Grid
+          item
+          lg={3}
+          sm={2}
+          xl={3}
+          xs={12}
+        >
+          <Participated valuerank={'embassador'} />
         </Grid>
         <Grid
           item
