@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import Logo from "../../assets/logo/LOGO_SEMFUNDO_APLICATIVO.png";
+import RingLoader from "react-spinners/RingLoader";
 import "./styles.css";
 import axios from "axios";
+import { isAuthenticated } from "../../services/auth";
 
-import {
-  CountryDropdown,
-  RegionDropdown,
-  CountryRegionData
-} from "react-country-region-selector";
+import { authContext } from "../../contexts/AuthContext";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 const SignUp = props => {
   const [username, setUsername] = useState("");
@@ -19,6 +18,8 @@ const SignUp = props => {
   const [region, setRegion] = useState("");
   const [isCompany, setIsCompany] = useState(false);
   const [success, setSuccess] = useState("");
+  const [loadingState, setLoadingState] = useState(false);
+  const auth = useContext(authContext);
 
   const selectCountry = val => {
     setCountry(val);
@@ -42,7 +43,13 @@ const SignUp = props => {
     }
   };
 
-  const postJson = () => {
+  const authenticJS = () => {
+    const { id, email } = JSON.parse(window.localStorage.getItem("UserAuth"));
+    isAuthenticated(!id && !email ? false : true);
+  };
+
+  const postJson = async () => {
+    setLoadingState(true);
     const jsonAll = {
       name: username,
       nickname: username,
@@ -59,17 +66,22 @@ const SignUp = props => {
       isCompany: isCompany,
       specialtiesId: ["string"]
     };
-    axios
+    await axios
       .post("https://red-equinox-253000.appspot.com/User", jsonAll)
       .then(response => {
         setSuccess(true);
-        console.log(response);
+        console.log(response.data._path.segments[1]);
+        setLoadingState(false);
+        let id = response.data._path.segments[1];
+        let email = jsonAll.email;
+        auth.setAuthStatus({ id, email });
+        authenticJS();
       })
       .catch(e => {
         console.log(e.response);
         switch (e.response) {
           case 400:
-            setError("Invalide fields T.T");
+            setError("Invalid fields T.T");
             break;
           case 405:
             setError("E-mail already registered");
@@ -78,6 +90,7 @@ const SignUp = props => {
             setError("There was an error registering your account. T.T");
             break;
         }
+        setLoadingState(false);
       });
   };
 
@@ -87,6 +100,13 @@ const SignUp = props => {
 
   return (
     <div className="background">
+      <RingLoader
+        className="ringloader"
+        sizeUnit={"px"}
+        size={150}
+        color={"#ff3333"}
+        loading={loadingState}
+      />
       <form onSubmit={handleSignUp}>
         <div className="forms">
           <div className="imagelinkIn">

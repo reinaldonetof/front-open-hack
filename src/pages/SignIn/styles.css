@@ -91,3 +91,9 @@ div.signin :link {
   font-weight: bold;  
 }
 
+.ringloader {
+  display: absolute;
+  margin: 0 auto;
+  border-color: red;
+  z-index: 3;
+}
