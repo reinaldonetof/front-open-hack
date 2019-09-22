@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import Logo from "../../assets/logo/LOGO_SEMFUNDO_APLICATIVO.png";
 import "./styles.css";
+import axios from "axios";
 
 import {
   CountryDropdown,
@@ -9,113 +10,136 @@ import {
   CountryRegionData
 } from "react-country-region-selector";
 
-class SignUp extends Component {
-  state = {
-    username: "",
-    email: "",
-    password: "",
-    error: "",
-    country: "",
-    region: "",
-    account: "user"
+const SignUp = props => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
+  const [isCompany, setIsCompany] = useState(false);
+  const [success, setSuccess] = useState("");
+
+  const selectCountry = val => {
+    setCountry(val);
   };
 
-  selectCountry(val) {
-    this.setState({ country: val });
-  }
+  const selectRegion = val => {
+    setRegion(val);
+  };
 
-  selectRegion(val) {
-    this.setState({ region: val });
-  }
-
-  selectAccount(val) {
-    this.setState({ account: val });
-  }
-
-  componentDidUpdate() {
-    console.log(this.state);
-  }
-
-  handleSignUp = e => {
+  const handleSignUp = e => {
     e.preventDefault();
-    const { username, email, password, country, region } = this.state;
     if (!username || !email || !password || !country || !region) {
-      this.setState({ error: "Preencha todos os dados para se cadastrar" });
+      setError("Fill all data to register");
     } else {
       try {
-        console.log({ username, email, password });
-        this.props.history.push("/init");
+        postJson();
       } catch (err) {
         console.log(err);
-        this.setState({ error: "Ocorreu um erro ao registrar sua conta. T.T" });
+        setError("There was an error registering your account. T.T");
       }
     }
   };
 
-  render() {
-    const { country, region } = this.state;
-    return (
-      <div className="background">
-        <form onSubmit={this.handleSignUp}>
-          <div className="forms">
-            <div className="imagelinkIn">
-              <Link to="/">
-                <img
-                  className="img-sign-up"
-                  src={Logo}
-                  alt="logo-movie-match"
-                />
-              </Link>
-            </div>
-            {this.state.error && <p>{this.state.error}</p>}
-            <label>
-              User or Company:
-              <select
-                onChange={e => this.setState({ account: e.target.value })}
-              >
-                <option value="user">User</option>
-                <option value="company">Company</option>
-              </select>
-            </label>
-            <input
-              type="text"
-              placeholder={
-                this.state.account === "user" ? "Username" : "Username / NIF / CNPJ"
-              }
-              onChange={e => this.setState({ username: e.target.value })}
-            />
-            <input
-              type="email"
-              placeholder="E-mail"
-              onChange={e => this.setState({ email: e.target.value })}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              onChange={e => this.setState({ password: e.target.value })}
-            />
-            <CountryDropdown
-              type="country"
-              value={country}
-              onChange={val => this.selectCountry(val)}
-            />
-            <RegionDropdown
-              type="region"
-              country={country}
-              value={region}
-              onChange={val => this.selectRegion(val)}
-            />
-            <button type="submit">Sign Up</button>
-            <hr />
-            <div className="signin">
-              <p1>Have an account? </p1>
-              <Link to="/signin">Sign in</Link>
-            </div>
-          </div>
-        </form>
-      </div>
-    );
+  const postJson = () => {
+    const jsonAll = {
+      name: username,
+      nickname: username,
+      email: email,
+      password: password,
+      gender: "string",
+      description: "string",
+      imgurl:
+        "https://drive.google.com/file/d/1gVn8P4GCR1jLxcm1N8cGrZNmAAkC2XU9/view?usp=sharing",
+      document: {
+        country: country,
+        region: region
+      },
+      isCompany: isCompany,
+      specialtiesId: ["string"]
+    };
+    axios
+      .post("https://red-equinox-253000.appspot.com/User", jsonAll)
+      .then(response => {
+        setSuccess(true);
+        console.log(response);
+      })
+      .catch(e => {
+        console.log(e.response);
+        switch (e.response) {
+          case 400:
+            setError("Invalide fields T.T");
+            break;
+          case 405:
+            setError("E-mail already registered");
+            break;
+          default:
+            setError("There was an error registering your account. T.T");
+            break;
+        }
+      });
+  };
+
+  if (success) {
+    return <Redirect to="/init" />;
   }
-}
+
+  return (
+    <div className="background">
+      <form onSubmit={handleSignUp}>
+        <div className="forms">
+          <div className="imagelinkIn">
+            <Link to="/">
+              <img className="img-sign-up" src={Logo} alt="logo-movie-match" />
+            </Link>
+          </div>
+          {error && <p>{error}</p>}
+          <label>
+            User or Company:
+            <select onChange={e => setIsCompany(e.target.value)}>
+              <option value={false}>User</option>
+              <option value={true}>Company</option>
+            </select>
+          </label>
+          <input
+            type="text"
+            placeholder={
+              isCompany === false ? "Username" : "Username / NIF / CNPJ"
+            }
+            onChange={e => setUsername(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="E-mail"
+            onChange={e => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={e => setPassword(e.target.value)}
+          />
+          <CountryDropdown
+            type="country"
+            value={country}
+            onChange={val => selectCountry(val)}
+          />
+          <RegionDropdown
+            type="region"
+            country={country}
+            value={region}
+            onChange={val => selectRegion(val)}
+          />
+          <button type="submit">Sign Up</button>
+          <hr />
+          <div className="signin">
+            <p1>Have an account? </p1>
+            <Link to="/signin">Sign in</Link>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default withRouter(SignUp);
