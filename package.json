@@ -32,7 +32,7 @@
     "underscore": "^1.9.1",
     "uuid": "^3.3.2",
     "validate.js": "^0.13.1",
-    "validator": "^11.1.0",
+    "validator": "^13.7.0",
     "video-react": "^0.14.1"
   },
   "scripts": {
